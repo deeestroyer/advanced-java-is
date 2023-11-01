@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {HttpClient, HttpResponse,HttpHeaders} from "@angular/common/http";
 import { Observable } from 'rxjs';
 import {map} from "rxjs/operators";
+import {DataService} from './services/data.service';
 
 
 
@@ -27,11 +28,23 @@ export class AppComponent implements OnInit{
   request!:ReserveRoomRequest;
   currentCheckInVal!:string;
   currentCheckOutVal!:string;
+  welcomeMessageEN: any;
+  welcomeMessageFR: any;
 
     ngOnInit(){
       this.roomsearch= new FormGroup({
         checkin: new FormControl(' '),
         checkout: new FormControl(' ')
+      });
+
+      const dataServiceEN = new DataService(this.httpClient);
+      dataServiceEN.getDataEN().subscribe((response) => {
+        this.welcomeMessageEN = response;
+      });
+
+      const dataServiceFR = new DataService(this.httpClient);
+      dataServiceFR.getDataFR().subscribe((response) => {
+        this.welcomeMessageFR = response;
       });
 
  //     this.rooms=ROOMS;

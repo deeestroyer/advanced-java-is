@@ -68,7 +68,18 @@ export class ConfigService {
         catchError(this.handleError)
       );
   }
-
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+  private apiUrl = 'http://your-java-server-url/api/data'; // Replace with your Java controller URL
+
+  constructor(private httpClient: HttpClient) { }
+
+  getData(): Observable<any> {
+    return this.httpClient.get(this.apiUrl);
+  }
+}
 
