@@ -30,6 +30,9 @@ export class AppComponent implements OnInit{
   currentCheckOutVal!:string;
   welcomeMessageEN: any;
   welcomeMessageFR: any;
+  timeET: any;
+  timeMT: any;
+  timeUTC: any;
 
     ngOnInit(){
       this.roomsearch= new FormGroup({
@@ -45,6 +48,21 @@ export class AppComponent implements OnInit{
       const dataServiceFR = new DataService(this.httpClient);
       dataServiceFR.getDataFR().subscribe((response) => {
         this.welcomeMessageFR = response;
+      });
+
+      const dataServiceET = new DataService(this.httpClient);
+      dataServiceET.getDataET().subscribe((response) => {
+        this.timeET = response;
+      });
+
+      const dataServiceMT = new DataService(this.httpClient);
+      dataServiceMT.getDataMT().subscribe((response) => {
+        this.timeMT = response;
+      });
+
+      const dataServiceUTC = new DataService(this.httpClient);
+      dataServiceUTC.getDataUTC().subscribe((response) => {
+        this.timeUTC = response;
       });
 
  //     this.rooms=ROOMS;
